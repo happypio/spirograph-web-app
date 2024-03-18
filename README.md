@@ -87,7 +87,7 @@ If the circle rolls inside the orbit, then $N = \frac{(R-r)}{r}$ and we need to 
 
 For $t$ in the range $\langle 0, 2 \Pi \rangle$ we will achieve a full rotation.
 
-To determine the number of full rotations needed to return to the starting position, we can iterate over $k \geq 1, k \in\Z$.
+To determine the number of full rotations needed to return to the starting position, we can iterate over $k \geq 1, k \in \mathbb{Z}$.
 
 ## Installation and Run
 

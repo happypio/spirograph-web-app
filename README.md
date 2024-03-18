@@ -15,10 +15,10 @@ https://spirograph-si43nktrqa-lm.a.run.app/
 
 Below, you can see examples of spirographs generated with this app. (The last one uses an elipse as its orbit shape) 
 
-<img src="./docs/images/sp1.png" alt="drawing" width="300"/>
-<img src="./docs/images/sp6.png" alt="drawing" width="300"/>
-<img src="./docs/images/sp7.png" alt="drawing" width="300"/>
-<img src="./docs/images/sp10.png" alt="drawing" width="300"/>
+|                          |                         |
+:-------------------------:|:-------------------------:
+![](./docs/images/sp1.png)  |  ![](./docs/images/sp6.png)
+![](./docs/images/sp7.png)  |  ![](./docs/images/sp10.png)
 
 ## Details
 
@@ -37,10 +37,9 @@ Below, you can see an example input view:
 
 Here, you can see a few frames from the animation process:
 
-<img src="./docs/images/c1.png" alt="drawing" width="150" height="120"/>
-<img src="./docs/images/c2.png" alt="drawing" width="150" height="120"/>
-<img src="./docs/images/c3.png" alt="drawing" width="150" height="120"/>
-<img src="./docs/images/c4.png" alt="drawing" width="150" height="120"/>
+|                          |                         | | |
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![](./docs/images/c1.png)  |  ![](./docs/images/c2.png) | ![](./docs/images/c3.png) | ![](./docs/images/c4.png)
 
 ## Technologies
 * Python 3.10
@@ -75,16 +74,20 @@ Let's define:
 * $\omega_2 = \omega_1 \cdot N = \omega_1 \cdot \frac{(R+r)}{r}$
 Now the equations are as follows:
 
-$$x_{center}(t) = (R + r) * cos(\omega_1 * t) \newline
-y_{center}(t) = (R + r) * sin(\omega_1 * t) \newline
-x(t) = (r - shift) * cos(\omega_2 * t) + x_{center}(t) \newline
-y(t) = (r - shift) * sin(\omega_2 * t) + y_{center}(t)$$
+$$x_{center}(t) = (R + r) * cos(\omega_1 * t)$$
+
+$$y_{center}(t) = (R + r) * sin(\omega_1 * t)$$
+
+$$x(t) = (r - shift) * cos(\omega_2 * t) + x_{center}(t)$$
+
+$$y(t) = (r - shift) * sin(\omega_2 * t) + y_{center}(t)$$
+
 
 If the circle rolls inside the orbit, then $N = \frac{(R-r)}{r}$ and we need to substract (instead of adding) r in the above formulas.
 
 For $t$ in the range $\langle 0, 2 \Pi \rangle$ we will achieve a full rotation.
 
-To determine the number of full rotations needed to return to the starting position, we can iterate over $k \geq 1, k \in \Z$.
+To determine the number of full rotations needed to return to the starting position, we can iterate over $k \geq 1, k \in \Z $.
 
 ## Installation and Run
 

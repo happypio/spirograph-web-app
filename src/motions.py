@@ -104,7 +104,7 @@ class CircleMotion:
             if np.isclose(y, y_start) and np.isclose(x, x_start):
                 return i
 
-        return max_rot
+        return 50  # max_rot
         # raise Exception("Could not converge the drawing")
 
     def calculate_point_movement(self):

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point Animation</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="ratio ratio-1x1">
+            <div id="plot"></div>
+        </div>
+    </div>
+    <script>
+
+        var show_borders = %i;
+        var animate = %i;
+        var speed = %i;
+        
+        var border_color = %s;
+        border_color = '#' + border_color.toString(16).padStart(6, '0');
+        var x_range = %s;
+        var y_range = %s;
+        var trace_colors = %s;
+        var x_border = %s;
+        var y_border = %s;
+        var o2_movements_x = %s;
+        var o2_movements_y = %s;
+
+        var o_colors = trace_colors.map(function(color) {
+            // Convert integer color to hexadecimal format
+            var hexColor = '#' + color.toString(16).padStart(6, '0');
+            return hexColor;
+        });
+        function init_plot(listsOfXs, listsOfYs) {
+        // Plot configuration
+        var layout = {
+            xaxis: {
+                range: x_range,
+                autorange: false,
+                showticklabels: false,
+                showgrid: false,
+                zeroline: false,
+            },
+            yaxis: {
+                range: y_range,
+                autorange: false,
+                showticklabels: false,
+                showgrid: false,
+                zeroline: false,
+            },
+            aspectratio: {x: 1, y: 1},
+            showlegend: false,
+        };
+
+        // Initialize traces
+        var traces = [];
+        for (var i = 0; i < listsOfXs.length; i++) {
+            if (animate) {
+                var x_data = []; var y_data = [];
+            }
+            else {
+                var x_data = listsOfXs[i]; var y_data = listsOfYs[i]
+            }
+            traces.push({
+                x: x_data,
+                y: y_data,
+                mode: 'lines',
+                line: {
+                    color: o_colors[i],
+                    width: 2
+                }
+            });
+        }
+        if (animate) {
+            for (var i = 0; i < listsOfXs.length; i++) {
+                traces.push({
+                    x: [],
+                    y: [],
+                    mode: 'markers',
+                    marker: {
+                        color: o_colors[i],
+                        size: 5
+                    }
+                });
+            }
+        };
+        if (show_borders) {
+            traces.push({
+                x: x_border,
+                y: y_border,
+                mode: "lines",
+                line: {
+                    color: border_color,
+                    width: 2
+                }
+            })
+        }
+
+        // Initialize plot with traces
+        var plot = Plotly.newPlot('plot', traces, layout);
+
+        // Function to animate points
+        function animate_points() {
+            var adder = speed;
+            var i = adder;
+            var interval = setInterval(function() {
+                if (i <= listsOfXs[0].length) {
+                    for (var j = 0; j < listsOfXs.length; j++) {
+                        Plotly.extendTraces('plot', {
+                            x: [listsOfXs[j].slice(i - adder, i)],
+                            y: [listsOfYs[j].slice(i - adder, i)]
+                        }, [j]);
+                    }
+                    for (var j = 0; j < listsOfXs.length; j++) {
+                        x_circle = o2_movements_x[j][i - 1]
+                        y_circle = o2_movements_y[j][i - 1]
+                        Plotly.restyle('plot', 'x', [x_circle], [listsOfXs.length + j]);
+                        Plotly.restyle('plot', 'y', [y_circle], [listsOfXs.length + j]);
+                    }
+                    i+=adder;
+                } else {
+                    clearInterval(interval);
+                    
+                    for (var j = 0; j < listsOfXs.length; j++) {
+                        Plotly.restyle('plot', 'x', [[]], [listsOfXs.length + j]);
+                        Plotly.restyle('plot', 'y', [[]], [listsOfXs.length + j]);
+                    }
+                }
+            }, 10); // Change the duration (in milliseconds) between points here
+        }
+
+        // Call the animatePoints function with the provided data
+        if (animate) {
+            animate_points();
+        }
+
+    }
+
+    init_plot(%s, %s)
+    </script>
+</body>
+</html>

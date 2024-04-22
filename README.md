@@ -11,7 +11,7 @@
 
 ## General info
 This Python web application generates and animates Spirograph drawings based on user input. It utilizes Streamlit with Bootstrap for the interface and NumPy for mathematical calculations. You can access the deployed application via the following link:
-https://spirograph-si43nktrqa-lm.a.run.app/
+~~https://spirograph-si43nktrqa-lm.a.run.app/~~ (unfortunately, my free trial GCP account has expired)
 
 Below, you can see examples of spirographs generated with this app. (The last one uses an elipse as its orbit shape) 
 
@@ -113,7 +113,7 @@ docker run -p 8501:8501 spirograph-app
 
 The application has been deployed on Google Cloud Platform (GCP) utilizing Artifact Registry and Cloud Run. To check it out, visit the following link:
 
-https://spirograph-si43nktrqa-lm.a.run.app/
+~~https://spirograph-si43nktrqa-lm.a.run.app/~~ (unfortunately, my free trial GCP account has expired)
 
 ## Project Structure
 
